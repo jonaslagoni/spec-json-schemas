@@ -1,31 +1,127 @@
 {
-  "oneOf": [
+  "allOf": [
     {
-      "$ref": "http://asyncapi.com/definitions/3.0.0/userPassword.json"
+      "if": {
+        "properties": {
+          "type": {
+            "const": "userPassword"
+          }
+        }
+      },
+      "then": {
+        "$ref": "http://asyncapi.com/definitions/3.0.0/userPassword.json"
+      }
     },
     {
-      "$ref": "http://asyncapi.com/definitions/3.0.0/apiKey.json"
+      "if": {
+        "properties": {
+          "type": {
+            "const": "X509"
+          }
+        }
+      },
+      "then": {
+        "$ref": "http://asyncapi.com/definitions/3.0.0/X509.json"
+      }
     },
     {
-      "$ref": "http://asyncapi.com/definitions/3.0.0/X509.json"
+      "if": {
+        "properties": {
+          "type": {
+            "const": "symmetricEncryption"
+          }
+        }
+      },
+      "then": {
+        "$ref": "http://asyncapi.com/definitions/3.0.0/symmetricEncryption.json"
+      }
     },
     {
-      "$ref": "http://asyncapi.com/definitions/3.0.0/symmetricEncryption.json"
+      "if": {
+        "properties": {
+          "type": {
+            "const": "asymmetricEncryption"
+          }
+        }
+      },
+      "then": {
+        "$ref": "http://asyncapi.com/definitions/3.0.0/asymmetricEncryption.json"
+      }
     },
     {
-      "$ref": "http://asyncapi.com/definitions/3.0.0/asymmetricEncryption.json"
+      "if": {
+        "properties": {
+          "type": {
+            "const": "http"
+          }
+        }
+      },
+      "then": {
+        "$ref": "http://asyncapi.com/definitions/3.0.0/HTTPSecurityScheme.json"
+      }
     },
     {
-      "$ref": "http://asyncapi.com/definitions/3.0.0/HTTPSecurityScheme.json"
+      "if": {
+        "properties": {
+          "type": {
+            "const": "oauth2"
+          }
+        }
+      },
+      "then": {
+        "$ref": "http://asyncapi.com/definitions/3.0.0/oauth2Flows.json"
+      }
     },
     {
-      "$ref": "http://asyncapi.com/definitions/3.0.0/oauth2Flows.json"
+      "if": {
+        "properties": {
+          "type": {
+            "const": "openIdConnect"
+          }
+        }
+      },
+      "then": {
+        "$ref": "http://asyncapi.com/definitions/3.0.0/openIdConnect.json"
+      }
     },
     {
-      "$ref": "http://asyncapi.com/definitions/3.0.0/openIdConnect.json"
+      "if": {
+        "properties": {
+          "type": {
+            "const": "gssapi"
+          }
+        }
+      },
+      "then": {
+        "$ref": "http://asyncapi.com/definitions/3.0.0/SaslGssapiSecurityScheme.json"
+      }
     },
     {
-      "$ref": "http://asyncapi.com/definitions/3.0.0/SaslSecurityScheme.json"
+      "if": {
+        "properties": {
+          "type": {
+            "const": "plain"
+          }
+        }
+      },
+      "then": {
+        "$ref": "http://asyncapi.com/definitions/3.0.0/SaslPlainSecurityScheme.json"
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "enum": [
+              "scramSha256",
+              "scramSha512"
+            ]
+          }
+        }
+      },
+      "then": {
+        "$ref": "http://asyncapi.com/definitions/3.0.0/SaslScramSecurityScheme.json"
+      }
     }
   ],
   "$schema": "http://json-schema.org/draft-07/schema#",
