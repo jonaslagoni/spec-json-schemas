@@ -1,5 +1,4 @@
 {
-  "$schema": "../../../schemas/3.0.0-without-$id.json",
   "asyncapi": "3.0.0",
   "info": {
     "title": "Account Service",
@@ -7,45 +6,20 @@
     "description": "This service is in charge of processing user signups"
   },
   "channels": {
-    "UserSignedUpChannel": {
+    "OpenAPI-UserSignedUpChannel": {
       "address": "user/signedup",
       "messages": {
         "UserSignedUp": {
-          "payload": {
-            "schemaFormat": "application/vnd.oai.openapi;version=3.0.0",
-            "schema": {
-              "properties": {
-                "id": {
-                  "type": "integer"
-                },
-                "name": {
-                  "type": "string"
-                },
-                "completed": {
-                  "type": "boolean"
-                },
-                "completed_at": {
-                  "type": "string",
-                  "format": "date-time",
-                  "nullable": true
-                }
-              },
-              "required": [
-                "id",
-                "name",
-                "completed"
-              ]
-            }
-          }
+          "$ref": "#/components/messages/OpenAPI-UserSignedUp"
         }
       }
     }
   },
   "operations": {
-    "PublishUserSignedUp": {
+    "OpenAPI-PublishUserSignedUp": {
       "action": "send",
       "channel": {
-        "$ref": "#/channels/UserSignedUpChannel"
+        "$ref": "#/channels/OpenAPI-UserSignedUpChannel"
       },
       "bindings": {
         "mqtt": {
@@ -63,10 +37,10 @@
         }
       }
     },
-    "PublishUserSignedUpDefaultBinding": {
+    "OpenAPI-PublishUserSignedUpDefaultBinding": {
       "action": "send",
       "channel": {
-        "$ref": "#/channels/UserSignedUpChannel"
+        "$ref": "#/channels/OpenAPI-UserSignedUpChannel"
       },
       "bindings": {
         "mqtt": {
@@ -77,6 +51,46 @@
             "type": "string",
             "enum": [
               "my-app-id"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "OpenAPI-ReferencedSchema" : {
+        "schemaFormat": "application/vnd.oai.openapi;version=3.0.0",
+        "schema": {
+          "$ref": "reference-to-some-openapi-file.json"
+        }
+      }
+    },
+    "messages": {
+      "OpenAPI-UserSignedUp": {
+        "payload": {
+          "schemaFormat": "application/vnd.oai.openapi;version=3.0.0",
+          "schema": {
+            "properties": {
+              "id": {
+                "type": "integer"
+              },
+              "name": {
+                "type": "string"
+              },
+              "completed": {
+                "type": "boolean"
+              },
+              "completed_at": {
+                "type": "string",
+                "format": "date-time",
+                "nullable": true
+              }
+            },
+            "required": [
+              "id",
+              "name",
+              "completed"
             ]
           }
         }
